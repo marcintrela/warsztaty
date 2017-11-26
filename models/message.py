@@ -80,20 +80,3 @@ class Message():
         return ret
 
 
-
-# con = connect_to_db('warsztat1')
-# cursor = con.cursor()
-# # mes = Message()
-# # mes.from_user = 5
-# # mes.to_user = 15
-# # mes.text_message = 'moja inna pierwsza wiadomość'
-# # mes.create_date = '2017-11-20'
-# # mes.save_to_db(cursor)
-#
-# mm = Message.load_message_by_id(cursor, 1)
-# print('wiadomość id.'+str(mm.id)+' od: '+str(mm.from_user)+' do: '+str(mm.to_user)+' o treści: '+mm.text_message)
-# mall = Message.load_all_message(cursor)
-# for row in mall:
-#     print(row.from_user, row.text_message)
-# cursor.close()
-# con.close()
