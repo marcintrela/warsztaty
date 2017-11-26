@@ -1,5 +1,6 @@
 from pass_hash import *
-from local_settings import connect_to_db
+
+
 
 class Users:
 
@@ -41,7 +42,7 @@ class Users:
     @staticmethod
     def load_user_by_id(cursor, id):
         sql = 'SELECT id, emeil, username, hashed_password FROM Users WHERE id = {}'.format(id)
-        result = cursor.execute(sql)
+        cursor.execute(sql)
         data = cursor.fetchone()
         if data is not None:
             loaded_user = Users()
@@ -56,7 +57,7 @@ class Users:
     @staticmethod
     def load_user_by_login(cursor, login):
         sql = 'SELECT id, emeil, username, hashed_password FROM Users WHERE username = %s'
-        result = cursor.execute(sql, (login,))
+        cursor.execute(sql, (login,))
         data = cursor.fetchone()
         if data is not None:
             loaded_user = Users()
@@ -72,7 +73,7 @@ class Users:
     def load_all_users(cursor):
         sql = 'SELECT id, emeil, username, hashed_password FROM Users'
         ret = []
-        result = cursor.execute(sql)
+        cursor.execute(sql)
         data = cursor.fetchall()
         for row in data:
             loaded_user = Users()
@@ -89,35 +90,3 @@ class Users:
         self.__id = -1
         return True
 
-
-
-
-
-
-'''#nowyuser = Users()
-#nowyuser.email = 'trellcia@poczta.onet.pl'
-#nowyuser.username = 'marcin'
-#nowyuser.set_password('marcin123','')
-inny = Users()
-inny.email = 'mala@malpa.pl'
-inny.username = 'paparapa12'
-inny.set_password('hasloo','moje')
-
-try:
-    con = connect_to_db('warsztat1')
-    cursor = con.cursor()
-    print('OK')
-    inny = Users.load_user_by_id(cursor, 3)
-    inny.email = 'mala@mapl.pl'
-    inny.save_to_db(cursor)
-    print(inny.username,inny.id)
-    cos = Users.load_all_users(cursor)
-    for row in cos:
-        print(row.username, row.email, row.id, row.hashed_password)
-    marcin = Users.load_user_by_login(cursor, 'marcin')
-    print(marcin.id, marcin.hashed_password,marcin.username, marcin.email)
-except:
-    raise Exception('coś nie tak')
-finally:
-    cursor.close()
-    con.close()'''
